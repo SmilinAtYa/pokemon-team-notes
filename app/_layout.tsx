@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { useColorScheme } from "@/components/useColorScheme";
 import { Pressable } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
+import { MMKVLoader } from "react-native-mmkv-storage";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -23,6 +24,7 @@ export const unstable_settings = {
   initialRouteName: "index",
 };
 
+export const storage = new MMKVLoader().initialize();
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 

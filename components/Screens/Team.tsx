@@ -5,10 +5,16 @@ import PokemonSelection from "@/components/PokemonSelection";
 import useTeamCreator from "@/hooks/useTeamCreator";
 import TeamTable from "../TeamTable";
 import { useState } from "react";
+import { useLocalSearchParams } from "expo-router";
+
+type TeamParams = {
+  id: string;
+};
 
 const Team = () => {
   const { addToTeam, team, error } = useTeamCreator();
   const [isEditingTeam, setIsEditingTeam] = useState(false);
+  const { id } = useLocalSearchParams<TeamParams>();
 
   return (
     <View style={styles.container}>
@@ -24,7 +30,7 @@ const Team = () => {
 
       {error && <Text style={styles.error}>{error}</Text>}
       {isEditingTeam && <PokemonSelection onSelectPokemon={addToTeam} />}
-      <TeamTable team={team} isEditing={isEditingTeam} />
+      <TeamTable teamId={id} team={team} isEditing={isEditingTeam} />
       <View
         style={styles.separator}
         lightColor="#eee"

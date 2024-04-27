@@ -31,12 +31,20 @@ export default function TabLayout() {
         // to prevent a hydration error in React Navigation v6.
         headerShown: useClientOnlyValue(false, true),
       }}
+      initialRouteName="index"
     >
       <Tabs.Screen
         name="index"
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="[pokemon]"
+        options={{
+          headerShown: false,
+          tabBarButton: () => null,
         }}
       />
       <Tabs.Screen
