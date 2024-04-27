@@ -1,11 +1,11 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
+import React from "react";
+import { StyleSheet } from "react-native";
 
-import { ExternalLink } from './ExternalLink';
-import { MonoText } from './StyledText';
-import { Text, View } from './Themed';
+import { ExternalLink } from "./ExternalLink";
+import { MonoText } from "./StyledText";
+import { Text, View } from "./Themed";
 
-import Colors from '@/constants/Colors';
+import Colors from "@/constants/Colors";
 
 export default function EditScreenInfo({ path }: { path: string }) {
   return (
@@ -14,31 +14,31 @@ export default function EditScreenInfo({ path }: { path: string }) {
         <Text
           style={styles.getStartedText}
           lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-          Open up the code for this screen:
+          darkColor="rgba(255,255,255,0.8)"
+        >
+          Raycasting Studio is a small indie game studio dedicated to creating
+          mobile and PC games. This project is a tool made mainly for the
+          Pokemon VGC with the purpose of managing your current team and note
+          taking a bit easier.
         </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-          darkColor="rgba(255,255,255,0.05)"
-          lightColor="rgba(0,0,0,0.05)">
-          <MonoText>{path}</MonoText>
-        </View>
 
         <Text
           style={styles.getStartedText}
           lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-          Change any of the text, save the file, and your app will automatically update.
+          darkColor="rgba(255,255,255,0.8)"
+        >
+          I hope everyone enjoys!
         </Text>
       </View>
 
       <View style={styles.helpContainer}>
         <ExternalLink
           style={styles.helpLink}
-          href="https://docs.expo.io/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet">
+          href="mailto:raycasting.studio@gmail.com"
+        >
           <Text style={styles.helpLinkText} lightColor={Colors.light.tint}>
-            Tap here if your app doesn't automatically update after making changes
+            Any issues or request for this application ca be submitted to
+            raycasting.studio@gmail.com.
           </Text>
         </ExternalLink>
       </View>
@@ -48,7 +48,7 @@ export default function EditScreenInfo({ path }: { path: string }) {
 
 const styles = StyleSheet.create({
   getStartedContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     marginHorizontal: 50,
   },
   homeScreenFilename: {
@@ -61,17 +61,17 @@ const styles = StyleSheet.create({
   getStartedText: {
     fontSize: 17,
     lineHeight: 24,
-    textAlign: 'center',
+    textAlign: "center",
   },
   helpContainer: {
     marginTop: 15,
     marginHorizontal: 20,
-    alignItems: 'center',
+    alignItems: "center",
   },
   helpLink: {
     paddingVertical: 15,
   },
   helpLinkText: {
-    textAlign: 'center',
+    textAlign: "center",
   },
 });
