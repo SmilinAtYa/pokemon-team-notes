@@ -1,6 +1,7 @@
 import { SpeciesData } from "@/data/global-types";
 import { router } from "expo-router";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import PokemonIcon from "./PokemonIcon";
 
 interface TeamTableProps {
   team: SpeciesData[];
@@ -19,13 +20,15 @@ const TeamTable = ({ team, isEditing, teamId }: TeamTableProps) => {
     });
 
   return (
-    <View>
+    <View style={styles.container}>
       {team.map((pokemon) => {
         return (
           <View style={styles.textContainer}>
             <TouchableOpacity
+              style={styles.pokemonContainer}
               onPress={() => navigateToNotesScreen(pokemon.name)}
             >
+              <PokemonIcon name={pokemon.name} />
               <Text style={styles.text}>{pokemon.name}</Text>
             </TouchableOpacity>
             {isEditing && (
@@ -43,9 +46,17 @@ const TeamTable = ({ team, isEditing, teamId }: TeamTableProps) => {
 export default TeamTable;
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+  },
   textContainer: {
     flexDirection: "row",
     alignContent: "space-between",
+    alignItems: "flex-start",
+  },
+  pokemonContainer: {
+    alignItems: "center",
+    flexDirection: "column",
   },
   text: {
     fontSize: 20,
