@@ -19,11 +19,12 @@ const TeamTable = ({ team, isEditing, teamId }: TeamTableProps) => {
       },
     });
 
+  console.log(JSON.stringify(team, null, 2));
   return (
     <View style={styles.container}>
-      {team.map((pokemon) => {
+      {team.map((pokemon, index) => {
         return (
-          <View style={styles.textContainer}>
+          <View key={index} style={styles.textContainer}>
             <TouchableOpacity
               style={styles.pokemonContainer}
               onPress={() => navigateToNotesScreen(pokemon.name)}
