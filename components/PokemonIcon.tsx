@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Image, StyleSheet } from "react-native";
 
 interface PokemonIconProps {
-  name: string;
+  name?: string;
 }
 
 type PokemonSpritesType = {
@@ -21,13 +21,17 @@ const PokemonIcon = ({ name }: PokemonIconProps) => {
 
   useEffect(() => {
     const getImageLinkAsync = async () => {
-      const data = await fetch(
-        `https://pokeapi.co/api/v2/pokemon-form/${name.toLowerCase()}/`
-      );
+      try {
+        const data = await fetch(
+          `https://pokeapi.co/api/v2/pokemon-form/${name?.toLowerCase()}/`
+        );
 
-      if (data.status === 200) {
-        const pokemonData: PokemonData = await data.json();
-        setImageLink(pokemonData.sprites.front_default);
+        if (data.status === 200) {
+          const pokemonData: PokemonData = await data.json();
+          setImageLink(pokemonData.sprites.front_default);
+        }
+      } catch (e) {
+        console.log(e);
       }
     };
 
