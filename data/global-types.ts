@@ -19,17 +19,17 @@ type SpeciesTag =
 export interface SpeciesData {
   name: string;
   /** National Dex number */
-  num: number;
+  num?: number;
 
-  types: string[];
-  abilities: SpeciesAbility;
-  baseStats: StatsTable;
-  eggGroups: string[];
-  weightkg: number;
+  types?: string[];
+  abilities?: SpeciesAbility;
+  baseStats?: StatsTable;
+  eggGroups?: string[];
+  weightkg?: number;
   gen?: number;
   readonly genderRatio?: { M: number; F: number };
-  readonly heightm: number;
-  readonly color: string;
+  readonly heightm?: number;
+  readonly color?: string;
   readonly evos?: string[];
   readonly evoType?:
     | "trade"
