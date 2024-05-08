@@ -13,6 +13,7 @@ import { useColorScheme } from "@/components/useColorScheme";
 import { Pressable } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import { MMKVLoader } from "react-native-mmkv-storage";
+import LogoScreen from "@/components/Screens/LogoScreen";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -46,7 +47,7 @@ export default function RootLayout() {
   }, [loaded]);
 
   if (!loaded) {
-    return null;
+    return <LogoScreen />;
   }
 
   return <RootLayoutNav />;
