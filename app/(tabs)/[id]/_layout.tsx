@@ -36,22 +36,15 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
+          title: "Team",
           headerShown: false,
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="[pokemon]"
-        options={{
-          headerShown: false,
-          tabBarButton: () => null,
         }}
       />
       <Tabs.Screen
         name="two"
         options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerShown: false,
+          title: "Notes",
         }}
       />
     </Tabs>

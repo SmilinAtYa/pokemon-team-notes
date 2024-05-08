@@ -60,6 +60,10 @@ function RootLayoutNav() {
       <Stack>
         <Stack.Screen name="index" options={{ title: "Welcome!" }} />
         <Stack.Screen
+          name="[id]/[pokemon]"
+          options={{ title: "Pokemon notes!" }}
+        />
+        <Stack.Screen
           name="(tabs)"
           options={{
             title: "Pokemon Team Manager",

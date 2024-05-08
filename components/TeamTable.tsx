@@ -12,7 +12,7 @@ interface TeamTableProps {
 const TeamTable = ({ team, isEditing, teamId }: TeamTableProps) => {
   const navigateToNotesScreen = (pokemonName: string) =>
     router.navigate({
-      pathname: "/(tabs)/[id]/[pokemon]/",
+      pathname: "/[id]/[pokemon]/",
       params: {
         id: teamId,
         pokemon: pokemonName,

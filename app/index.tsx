@@ -1,4 +1,4 @@
-import { H1 } from "@/components/Typography/Typography";
+import { H1, H2 } from "@/components/Typography/Typography";
 import { SpeciesData } from "@/data/global-types";
 import { router } from "expo-router";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
@@ -42,7 +42,7 @@ const TeamSelector = () => {
         { pokemonName: team["pokemonName5"], heldItem: team["heldItem5"] },
       ],
     };
-
+    console.log(newTeam);
     setTeams([...teams, newTeam]);
   };
 
@@ -59,7 +59,7 @@ const TeamSelector = () => {
                   onPress={() => handleOnPress(team.name)}
                   style={styles.team}
                 >
-                  <Text>{team.name}</Text>
+                  <H2 text={team.name} />
                 </TouchableOpacity>
               );
             })}
