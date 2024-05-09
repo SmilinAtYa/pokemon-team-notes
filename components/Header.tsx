@@ -1,29 +1,36 @@
 import { Image, StyleSheet, View } from "react-native";
 import Logo from "../assets/images/logo.png";
-import { H2 } from "./Typography/Typography";
+import { H3 } from "./Typography/Typography";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { lightestGray } from "./Styles/Colors";
+import { ScaledSheet } from "react-native-size-matters";
 
 const Header = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Image
-        style={{ height: 28, width: 28, marginRight: 8 }}
+        style={styles.image}
         resizeMethod="scale"
         resizeMode="contain"
         source={Logo}
       />
-      <H2 text="PokéBuild" />
+      <H3 text="PokéBuild" />
     </SafeAreaView>
   );
 };
 
 export default Header;
 
-const styles = StyleSheet.create({
+const styles = ScaledSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 20,
-    paddingTop: 12,
+    paddingHorizontal: "20@s",
+    backgroundColor: lightestGray,
+  },
+  image: {
+    height: "28@s",
+    width: "28@s",
+    marginRight: "8@s",
   },
 });
