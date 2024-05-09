@@ -62,7 +62,10 @@ function RootLayoutNav() {
       <Stack>
         <Stack.Screen
           name="index"
-          options={{ title: "Welcome!", header: () => <Header /> }}
+          options={{
+            header: () => <Header />,
+            contentStyle: { backgroundColor: "white" },
+          }}
         />
         <Stack.Screen
           name="[id]/[pokemon]"
