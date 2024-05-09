@@ -76,8 +76,8 @@ const TeamSelector = () => {
                   <View style={styles.iconList}>
                     {team.slots.map((team, index) => {
                       return (
-                        <View style={styles.icon}>
-                          <PokemonIcon key={index} name={team.pokemonName} />
+                        <View key={index} style={styles.icon}>
+                          <PokemonIcon name={team.pokemonName} />
                         </View>
                       );
                     })}
