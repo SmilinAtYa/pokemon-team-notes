@@ -1,22 +1,34 @@
+import * as Colors from "../Styles/Colors";
 import { StyleSheet, Text, TextStyle } from "react-native";
+
+type ColorNames = keyof typeof Colors;
 
 interface Typography {
   text: string;
   style?: TextStyle;
+  color?: ColorNames;
 }
 
-export const H1 = ({ text, style }: Typography) => (
-  <Text style={[styles.h1, style]}>{text}</Text>
+export const H1 = ({ text, style, color }: Typography) => (
+  <Text style={[styles.h1, { color: color && Colors[color] }, style]}>
+    {text}
+  </Text>
 );
-export const H2 = ({ text, style }: Typography) => (
-  <Text style={[styles.h2, style]}>{text}</Text>
+export const H2 = ({ text, style, color }: Typography) => (
+  <Text style={[styles.h2, { color: color && Colors[color] }, style]}>
+    {text}
+  </Text>
 );
 
-export const P1 = ({ text, style }: Typography) => (
-  <Text style={[styles.p1, style]}>{text}</Text>
+export const P1 = ({ text, style, color }: Typography) => (
+  <Text style={[styles.p1, { color: color && Colors[color] }, style]}>
+    {text}
+  </Text>
 );
-export const P2 = ({ text, style }: Typography) => (
-  <Text style={[styles.p2, style]}>{text}</Text>
+export const P2 = ({ text, style, color }: Typography) => (
+  <Text style={[styles.p2, { color: color && Colors[color] }, style]}>
+    {text}
+  </Text>
 );
 
 const styles = StyleSheet.create({

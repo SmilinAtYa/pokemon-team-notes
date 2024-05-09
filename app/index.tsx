@@ -1,12 +1,15 @@
 import { H1, H2 } from "@/components/Typography/Typography";
 import { SpeciesData } from "@/data/global-types";
 import { router } from "expo-router";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { useMMKVStorage } from "react-native-mmkv-storage";
 import { storage } from "./_layout";
 import CreateTeamForm, {
   TeamFormDefaultValues,
 } from "@/components/CreateTeamForm";
+import { FontAwesome } from "@expo/vector-icons";
+import { toCapitalCase } from "@/utils/format";
+import { gray } from "@/components/Styles/Colors";
 
 type TeamSlot = {
   pokemonName: string;
@@ -50,7 +53,6 @@ const TeamSelector = () => {
     <View style={styles.container}>
       {teams.length > 0 ? (
         <>
-          <H1 text="Select Your Team:" />
           <View style={styles.teamContainer}>
             {teams.map((team, index) => {
               return (
@@ -59,7 +61,16 @@ const TeamSelector = () => {
                   onPress={() => handleOnPress(team.name)}
                   style={styles.team}
                 >
-                  <H2 text={team.name} />
+                  <View style={styles.teamTitle}>
+                    <View style={styles.teamName}>
+                      <H2 color="gray" text={toCapitalCase(team.name)} />
+                      <FontAwesome
+                        name="chevron-right"
+                        color={gray}
+                        size={18}
+                      />
+                    </View>
+                  </View>
                 </TouchableOpacity>
               );
             })}
@@ -85,10 +96,31 @@ const styles = StyleSheet.create({
   },
   teamContainer: {
     flex: 1,
+    flexDirection: "row",
     justifyContent: "center",
   },
   team: {
+    flex: 1,
     padding: 24,
-    backgroundColor: "light-gray",
+    borderWidth: 0.5,
+    borderRadius: 12,
+    backgroundColor: "rgba(12, 178, 251, 0.06)",
+    borderColor: "rgba(12, 178, 251, 0.4)",
+    maxHeight: 150,
+  },
+  teamTitle: {
+    flex: 1,
+    maxHeight: 50,
+    justifyContent: "center",
+    borderRadius: 80,
+    backgroundColor: "rgba(255, 255, 255, 1)",
+    paddingHorizontal: 10,
+  },
+  teamName: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
+    paddingVertical: 8,
   },
 });
