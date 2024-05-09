@@ -14,6 +14,7 @@ import { Pressable } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import { MMKVLoader } from "react-native-mmkv-storage";
 import LogoScreen from "@/components/Screens/LogoScreen";
+import Header from "@/components/Header";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -59,7 +60,10 @@ function RootLayoutNav() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack.Screen name="index" options={{ title: "Welcome!" }} />
+        <Stack.Screen
+          name="index"
+          options={{ title: "Welcome!", header: () => <Header /> }}
+        />
         <Stack.Screen
           name="[id]/[pokemon]"
           options={{ title: "Pokemon notes!" }}
