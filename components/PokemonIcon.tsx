@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Image, StyleSheet, View } from "react-native";
-import { lightGray } from "./Styles/Colors";
+import { lightGray, white } from "./Styles/Colors";
 import { ScaledSheet } from "react-native-size-matters";
 
 interface PokemonIconProps {
@@ -53,6 +53,7 @@ export default PokemonIcon;
 
 const styles = ScaledSheet.create({
   container: {
+    backgroundColor: white,
     marginTop: "8@s",
     borderRadius: "53@s",
     borderWidth: "1.5@s",
