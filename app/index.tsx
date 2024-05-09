@@ -1,7 +1,7 @@
-import { H1, H2 } from "@/components/Typography/Typography";
+import { H3 } from "@/components/Typography/Typography";
 import { SpeciesData } from "@/data/global-types";
 import { router } from "expo-router";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { useMMKVStorage } from "react-native-mmkv-storage";
 import { storage } from "./_layout";
 import CreateTeamForm, {
@@ -10,6 +10,9 @@ import CreateTeamForm, {
 import { FontAwesome } from "@expo/vector-icons";
 import { toCapitalCase } from "@/utils/format";
 import { gray } from "@/components/Styles/Colors";
+import PokemonIcon from "@/components/PokemonIcon";
+import { ScaledSheet } from "react-native-size-matters";
+import Button from "@/components/Button/Button";
 
 type TeamSlot = {
   pokemonName: string;
@@ -50,34 +53,48 @@ const TeamSelector = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.screen}>
       {teams.length > 0 ? (
         <>
-          <View style={styles.teamContainer}>
+          <View style={styles.container}>
             {teams.map((team, index) => {
               return (
-                <TouchableOpacity
-                  key={index}
-                  onPress={() => handleOnPress(team.name)}
-                  style={styles.team}
-                >
-                  <View style={styles.teamTitle}>
-                    <View style={styles.teamName}>
-                      <H2 color="gray" text={toCapitalCase(team.name)} />
+                <View key={index} style={styles.teamBoxContainer}>
+                  <TouchableOpacity
+                    onPress={() => handleOnPress(team.name)}
+                    style={styles.teamNameCapsuleContainer}
+                  >
+                    <View style={styles.teamNameCapsule}>
+                      <H3 color="gray" text={toCapitalCase(team.name)} />
                       <FontAwesome
                         name="chevron-right"
                         color={gray}
                         size={18}
                       />
                     </View>
+                  </TouchableOpacity>
+                  <View style={styles.iconList}>
+                    {team.slots.map((team, index) => {
+                      return (
+                        <View style={styles.icon}>
+                          <PokemonIcon key={index} name={team.pokemonName} />
+                        </View>
+                      );
+                    })}
                   </View>
-                </TouchableOpacity>
+                </View>
               );
             })}
           </View>
-          <TouchableOpacity onPress={() => storage.clearStore()}>
+          <Button
+            text="+ Add New Team"
+            onPress={() => null}
+            color="blue"
+            textColor="white"
+          />
+          {/* <TouchableOpacity onPress={() => storage.clearStore()}>
             <H1 text="Clear storage" />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </>
       ) : (
         <CreateTeamForm saveTeam={saveTeam} />
@@ -88,39 +105,44 @@ const TeamSelector = () => {
 
 export default TeamSelector;
 
-const styles = StyleSheet.create({
-  container: {
+const styles = ScaledSheet.create({
+  screen: {
     flex: 1,
     alignItems: "center",
-    padding: 24,
+    padding: "24@s",
   },
-  teamContainer: {
+  container: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
   },
-  team: {
+  teamBoxContainer: {
     flex: 1,
-    padding: 24,
+    paddingHorizontal: "12@s",
+    paddingVertical: "14@s",
     borderWidth: 0.5,
     borderRadius: 12,
     backgroundColor: "rgba(12, 178, 251, 0.06)",
     borderColor: "rgba(12, 178, 251, 0.4)",
-    maxHeight: 150,
+    maxHeight: "132@s",
   },
-  teamTitle: {
+  teamNameCapsuleContainer: {
     flex: 1,
-    maxHeight: 50,
     justifyContent: "center",
-    borderRadius: 80,
+    borderRadius: "80@s",
     backgroundColor: "rgba(255, 255, 255, 1)",
-    paddingHorizontal: 10,
+    paddingHorizontal: "10@s",
+    paddingVertical: "12@s",
+    maxHeight: "43@s",
   },
-  teamName: {
+  teamNameCapsule: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 10,
-    paddingVertical: 8,
+    paddingHorizontal: "10@s",
+  },
+  icon: { alignSelf: "flex-start", marginRight: 8 },
+  iconList: {
+    flexDirection: "row",
   },
 });
