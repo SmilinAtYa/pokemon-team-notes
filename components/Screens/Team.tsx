@@ -10,6 +10,8 @@ import { useMMKVStorage } from "react-native-mmkv-storage";
 import { storage } from "@/app/_layout";
 import { Team as TeamType } from "@/app";
 import { SpeciesData } from "@/data/global-types";
+import { ScaledSheet } from "react-native-size-matters";
+import TeamTableHeader from "../TeamTableHeader";
 
 type TeamParams = {
   id: string;
@@ -27,7 +29,7 @@ const Team = () => {
 
   return (
     <View style={styles.container}>
-      {isEditingTeam ? (
+      {/* {isEditingTeam ? (
         <TouchableOpacity onPress={() => setIsEditingTeam(false)}>
           <Text style={styles.title}>Save your team</Text>
         </TouchableOpacity>
@@ -35,27 +37,26 @@ const Team = () => {
         <TouchableOpacity onPress={() => setIsEditingTeam(true)}>
           <Text style={styles.title}>Edit your team</Text>
         </TouchableOpacity>
-      )}
+      )} */}
 
       {error && <Text style={styles.error}>{error}</Text>}
       {isEditingTeam && <PokemonSelection onSelectPokemon={addToTeam} />}
-      <TeamTable teamId={id} team={storedTeamNames} isEditing={isEditingTeam} />
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
+      <TeamTableHeader
+        teamName={storedTeam.name}
+        amountOfMembers={storedTeam.slots.length.toString()}
       />
+      <TeamTable teamId={id} team={storedTeamNames} isEditing={isEditingTeam} />
     </View>
   );
 };
 
 export default Team;
 
-const styles = StyleSheet.create({
+const styles = ScaledSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    padding: "18@s",
   },
   error: {
     fontSize: 20,
