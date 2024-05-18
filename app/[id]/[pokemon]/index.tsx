@@ -1,9 +1,18 @@
 import { storage } from "@/app/_layout";
-import { H1 } from "@/components/Typography/Typography";
+import Button from "@/components/Button/Button";
+import {
+  lightBlue,
+  midGray,
+  offWhite,
+  white,
+} from "@/components/Styles/Colors";
+import { H1, H4, P2, P3 } from "@/components/Typography/Typography";
+import { FontAwesome } from "@expo/vector-icons";
 import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
-import { Button, TextInput, View, Text, StyleSheet } from "react-native";
+import { TextInput, View, TouchableOpacity, ScrollView } from "react-native";
 import { useMMKVStorage } from "react-native-mmkv-storage";
+import { ScaledSheet } from "react-native-size-matters";
 
 type PokemonNotesParams = {
   id: string;
@@ -38,21 +47,51 @@ const PokemonNotes = () => {
 
   return (
     <View style={styles.container}>
-      <H1 text={`Notes for: ${pokemon}`} />
-      <TextInput
-        placeholder="Enter a new note"
-        value={newNote}
-        onChangeText={(text) => setNewNote(text)}
-        onSubmitEditing={handleAddNote}
-        style={styles.textInput}
-      />
-      <Button title="Add Note" onPress={handleAddNote} />
-      <View style={styles.mapContainer}>
-        {notes.map((note, index) => (
-          <Text key={index} style={styles.text}>
-            {note}
-          </Text>
-        ))}
+      <View style={[styles.mapContainer, styles.mapContent, styles.padding]}>
+        <H4 color="gray" text={`Notes for: ${pokemon}`} />
+        <ScrollView style={styles.mapContent}>
+          {notes.map((note, index) => (
+            <View key={index} style={styles.noteAndIconContainer}>
+              <View style={styles.noteContainer}>
+                <P3 color="gray" text={note} />
+              </View>
+              <View style={styles.iconContainer}>
+                <TouchableOpacity
+                  onPress={() => {
+                    const filteredNotes = notes.filter((item) => {
+                      return item !== note;
+                    });
+                    console.log(index);
+                    setNotes(filteredNotes);
+                  }}
+                  style={styles.icon}
+                >
+                  <FontAwesome size={18} name="trash-o" color={midGray} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.icon}>
+                  <FontAwesome size={18} name="pencil" color={midGray} />
+                </TouchableOpacity>
+              </View>
+            </View>
+          ))}
+        </ScrollView>
+      </View>
+      <View style={styles.padding}>
+        <TextInput
+          textAlignVertical="top"
+          placeholder="Write your note"
+          value={newNote}
+          onChangeText={(text) => setNewNote(text)}
+          onSubmitEditing={handleAddNote}
+          style={styles.textInput}
+          multiline
+        />
+        <Button
+          text="Save Note"
+          onPress={handleAddNote}
+          color="blue"
+          textColor="white"
+        />
       </View>
     </View>
   );
@@ -60,19 +99,53 @@ const PokemonNotes = () => {
 
 export default PokemonNotes;
 
-const styles = StyleSheet.create({
+const styles = ScaledSheet.create({
   container: {
-    padding: 20,
+    flex: 1,
+    justifyContent: "space-between",
   },
   textInput: {
-    marginBottom: 10,
-    padding: 10,
-    borderWidth: 1,
+    marginBottom: "10@s",
+    paddingTop: "10@s",
+    paddingHorizontal: "10@s",
+    borderWidth: "1@s",
     borderColor: "#ccc",
+    height: "150@s",
+    borderRadius: "6@s",
+  },
+  icon: {
+    borderRadius: "63@s",
+    padding: "6@s",
+    backgroundColor: white,
+    marginLeft: "6@s",
   },
   text: {
-    paddingVertical: 5,
-    fontSize: 16,
+    paddingVertical: "5@s",
+    fontSize: "16@s",
   },
-  mapContainer: { marginTop: 20 },
+  iconContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  mapContent: {
+    width: "100%",
+    flex: 1,
+  },
+  mapContainer: { backgroundColor: lightBlue },
+  noteContainer: {
+    paddingVertical: "6@s",
+    paddingHorizontal: "10@s",
+    borderWidth: "1@s",
+    borderRadius: "8@s",
+    borderColor: offWhite,
+    width: "85%",
+  },
+  noteAndIconContainer: {
+    marginVertical: "5@s",
+    flexDirection: "row",
+    paddingRight: "20@s",
+  },
+  padding: {
+    padding: "20@s",
+  },
 });

@@ -72,7 +72,7 @@ function RootLayoutNav() {
         />
         <Stack.Screen
           name="[id]/[pokemon]"
-          options={{ title: "Pokemon notes!" }}
+          options={{ title: "Add note", header: TabHeader }}
         />
         <Stack.Screen
           name="(tabs)"

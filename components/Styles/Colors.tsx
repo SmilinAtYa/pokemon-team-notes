@@ -11,3 +11,4 @@ export const lightBlue = "rgba(240, 248, 250, 1)";
 export const white = "rgba(252, 252, 252, 1)";
 export const neonGreen = "rgba(156, 195, 68, 0.3)";
 export const red = "rgba(225, 56, 40, 1)";
+export const offWhite = "rgba(226, 226, 226, 1)";
