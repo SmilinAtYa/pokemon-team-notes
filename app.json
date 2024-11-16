@@ -1,29 +1,29 @@
 {
   "expo": {
-    "name": "team-notes",
-    "slug": "team-notes",
+    "name": "Pokebuilder",
+    "slug": "Pokebuilder",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "icon": "./assets/images/splash.png",
+    "scheme": "pokebuilder",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/pokebuilderlogo.png",
-      "resizeMode": "contain",
+      "image": "./assets/images/splash.png",
+      "resizeMode": "300x300",
       "backgroundColor": "#ffffff"
     },
     "image": "latest",
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.teamnotes"
+      "bundleIdentifier": "com.raycasting.pokebuilder"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/splash.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.teamnotes"
+      "package": "com.raycasting.pokebuilder"
     },
     "web": {
       "bundler": "metro",
