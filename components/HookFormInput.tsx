@@ -1,7 +1,9 @@
 import { Controller, useFormContext } from "react-hook-form";
-import { TextInput } from "react-native";
+import { TextInput, TextInputProps } from "react-native";
+import { ScaledSheet, scale } from "react-native-size-matters";
+import { offWhite } from "./Styles/Colors";
 
-interface HookFormInputProps {
+interface HookFormInputProps extends TextInputProps {
   placeholder: string;
   name: string;
   onChangeText?: (text: string) => void;
@@ -23,10 +25,11 @@ const HookFormInput = ({
         return (
           <TextInput
             {...register(name)}
+            style={styles.container}
             placeholder={placeholder}
             onBlur={onBlur}
             onChangeText={(text) => {
-              // call onChane to trogger render update on input
+              // call onChane to trigger render update on input
               onChange(text);
               onChangeText?.(text);
             }}
@@ -41,3 +44,14 @@ const HookFormInput = ({
 };
 
 export default HookFormInput;
+
+const styles = ScaledSheet.create({
+  container: {
+    borderWidth: scale(1),
+    borderRadius: scale(6),
+    paddingVertical: scale(12),
+    paddingHorizontal: scale(10),
+    marginVertical: scale(10),
+    borderColor: offWhite,
+  },
+});

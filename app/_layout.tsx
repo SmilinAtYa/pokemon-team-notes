@@ -11,13 +11,13 @@ import { useEffect } from "react";
 
 import { useColorScheme } from "@/components/useColorScheme";
 import { Pressable, SafeAreaView, TouchableOpacity, View } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 import { MMKVLoader } from "react-native-mmkv-storage";
 import LogoScreen from "@/components/Screens/LogoScreen";
 import Header from "@/components/Header";
 import { H2 } from "@/components/Typography/Typography";
 import { lightestGray, midLightGray } from "@/components/Styles/Colors";
 import { ScaledSheet } from "react-native-size-matters";
+import TabHeader from "@/components/TabHeader";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -78,6 +78,7 @@ function RootLayoutNav() {
           name="(tabs)"
           options={{
             title: "My Team",
+            headerShown: false,
             header: TabHeader,
             headerRight: () => (
               <Link href="/modal" asChild>
@@ -86,13 +87,21 @@ function RootLayoutNav() {
                     <FontAwesome
                       name="info-circle"
                       size={25}
-                      color={Colors[colorScheme ?? "light"].text}
+                      //color={Colors[colorScheme ?? "light"].text}
                       style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
                     />
                   )}
                 </Pressable>
               </Link>
             ),
+          }}
+        />
+        <Stack.Screen
+          name="new-team"
+          options={{
+            header: TabHeader,
+            title: "Add New Team",
+            contentStyle: { backgroundColor: "white" },
           }}
         />
         <Stack.Screen
@@ -103,41 +112,3 @@ function RootLayoutNav() {
     </ThemeProvider>
   );
 }
-
-interface HeaderProps {
-  options: {
-    title?: string;
-  };
-}
-
-const TabHeader = ({ options }: HeaderProps) => {
-  if (!options.title) return;
-  return (
-    <SafeAreaView style={{ backgroundColor: lightestGray }}>
-      <TouchableOpacity style={styles.tabHeader} onPress={() => router.back()}>
-        {router.canGoBack() && (
-          <View style={styles.icon}>
-            <FontAwesome color={midLightGray} name="chevron-left" size={10} />
-          </View>
-        )}
-        <H2 color="midLightGray" text={options.title} />
-      </TouchableOpacity>
-    </SafeAreaView>
-  );
-};
-
-const styles = ScaledSheet.create({
-  tabHeader: {
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    marginBottom: 12,
-  },
-  icon: {
-    borderColor: midLightGray,
-    borderRadius: "45@s",
-    borderWidth: "1@s",
-    padding: "6@s",
-    marginHorizontal: "10@s",
-  },
-});

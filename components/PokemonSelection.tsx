@@ -9,41 +9,48 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
+import HookFormInput from "./HookFormInput";
 
 interface PokemonSelectionProps {
   onSelectPokemon: (pokemon: SpeciesData) => void;
+  slot: string;
 }
 
-const PokemonSelection = ({ onSelectPokemon }: PokemonSelectionProps) => {
+const PokemonSelection = ({ onSelectPokemon, slot }: PokemonSelectionProps) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredPokemon, setFilteredPokemon] = useState<SpeciesData>();
 
   const handleSearchFromPokedex = (text: string) => {
     setSearchQuery(text);
     setFilteredPokemon(Pokedex[text.toLowerCase()]);
-    console.log("filtered mon -> ", filteredPokemon);
   };
 
   const renderPokemonItem = (pokemon: SpeciesData) => (
-    <TouchableOpacity onPress={() => onSelectPokemon(pokemon)}>
+    <TouchableOpacity
+      onPress={() => {
+        setSearchQuery("");
+        setFilteredPokemon(undefined);
+        onSelectPokemon(pokemon);
+      }}
+    >
       <Text style={styles.pokemonItem}>{pokemon.name}</Text>
     </TouchableOpacity>
   );
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.searchInput}
+    <View>
+      <HookFormInput
+        name={`pokemonNanem${slot}`}
         placeholder="Search Pokémon..."
         value={searchQuery}
         onChangeText={handleSearchFromPokedex}
       />
       <FlatList
         data={
-          filteredPokemon &&
-          Object.keys(Pokedex).filter((name) =>
-            name.includes(searchQuery.toLowerCase())
-          )
+          searchQuery &&
+          Object.keys(Pokedex)
+            .filter((name) => name.startsWith(searchQuery.toLowerCase()))
+            .sort()
         }
         keyExtractor={(item) => item.toString()}
         renderItem={({ item }) => renderPokemonItem(Pokedex[item])}
@@ -53,10 +60,6 @@ const PokemonSelection = ({ onSelectPokemon }: PokemonSelectionProps) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-  },
   searchInput: {
     height: 40,
     borderColor: "#ccc",

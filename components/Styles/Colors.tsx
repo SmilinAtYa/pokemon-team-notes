@@ -8,6 +8,7 @@ export const borderColor = "rgba(240, 240, 240, 1))";
 export const blue = "rgba(12, 178, 251, 1)";
 export const midLightBlue = "rgba(12, 178, 251, 0.06)";
 export const lightBlue = "rgba(240, 248, 250, 1)";
+export const lightestBlue = "rgba(12, 178, 251, 0.4)";
 export const white = "rgba(252, 252, 252, 1)";
 export const neonGreen = "rgba(156, 195, 68, 0.3)";
 export const red = "rgba(225, 56, 40, 1)";

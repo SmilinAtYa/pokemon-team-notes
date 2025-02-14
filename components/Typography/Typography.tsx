@@ -1,11 +1,11 @@
 import { ScaledSheet } from "react-native-size-matters";
-import { Text, TextStyle } from "react-native";
+import { StyleProp, Text, TextStyle } from "react-native";
 import { ColorNames } from "../Styles/types";
 import * as Colors from "../Styles/Colors";
 
 interface Typography {
   text: string;
-  style?: TextStyle;
+  style?: StyleProp<TextStyle>;
   color?: ColorNames;
 }
 

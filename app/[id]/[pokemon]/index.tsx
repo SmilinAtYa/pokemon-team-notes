@@ -1,5 +1,6 @@
 import { storage } from "@/app/_layout";
 import Button from "@/components/Button/Button";
+import NoteTile from "@/components/NoteTile";
 import {
   lightBlue,
   midGray,
@@ -37,6 +38,15 @@ const PokemonNotes = () => {
     }
   };
 
+  function handleOnPress(note: string, index: number) {
+    return () => {
+      const filteredNotes = notes.filter((item) => {
+        return item !== note;
+      });
+      setNotes(filteredNotes);
+    };
+  }
+
   if (!pokemon) {
     return (
       <View>
@@ -51,27 +61,12 @@ const PokemonNotes = () => {
         <H4 color="gray" text={`Notes for: ${pokemon}`} />
         <ScrollView style={styles.mapContent}>
           {notes.map((note, index) => (
-            <View key={index} style={styles.noteAndIconContainer}>
-              <View style={styles.noteContainer}>
-                <P3 color="gray" text={note} />
-              </View>
-              <View style={styles.iconContainer}>
-                <TouchableOpacity
-                  onPress={() => {
-                    const filteredNotes = notes.filter((item) => {
-                      return item !== note;
-                    });
-                    console.log(index);
-                    setNotes(filteredNotes);
-                  }}
-                  style={styles.icon}
-                >
-                  <FontAwesome size={18} name="trash-o" color={midGray} />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.icon}>
-                  <FontAwesome size={18} name="pencil" color={midGray} />
-                </TouchableOpacity>
-              </View>
+            <View key={index}>
+              <NoteTile
+                deleteOnPress={handleOnPress(note, index)}
+                note={note}
+                index={index}
+              />
             </View>
           ))}
         </ScrollView>

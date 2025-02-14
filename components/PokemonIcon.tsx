@@ -5,6 +5,7 @@ import { ScaledSheet } from "react-native-size-matters";
 
 interface PokemonIconProps {
   name?: string;
+  small?: boolean;
 }
 
 type PokemonSpritesType = {
@@ -18,7 +19,7 @@ type PokemonData = {
   sprites: PokemonSpritesType;
 };
 
-const PokemonIcon = ({ name }: PokemonIconProps) => {
+const PokemonIcon = ({ name, small }: PokemonIconProps) => {
   const [imageLink, setImageLink] = useState<string>();
 
   useEffect(() => {
@@ -43,8 +44,13 @@ const PokemonIcon = ({ name }: PokemonIconProps) => {
   if (!imageLink) return;
 
   return (
-    <View style={styles.container}>
-      <Image style={styles.tinyLogo} src={imageLink} />
+    <View
+      style={[
+        styles.container,
+        small ? styles.smallContainer : styles.largeContainer,
+      ]}
+    >
+      <Image style={small ? styles.logoSmall : styles.logo} src={imageLink} />
     </View>
   );
 };
@@ -59,13 +65,23 @@ const styles = ScaledSheet.create({
     borderWidth: "1.5@s",
     borderColor: lightGray,
     padding: "2.5@s",
-    width: "50@s",
-    height: "50@s",
     justifyContent: "center",
     alignItems: "center",
   },
-  tinyLogo: {
+  largeContainer: {
+    width: "50@s",
+    height: "50@s",
+  },
+  smallContainer: {
     width: "40@s",
     height: "40@s",
+  },
+  logo: {
+    width: "40@s",
+    height: "40@s",
+  },
+  logoSmall: {
+    width: "30@s",
+    height: "30@s",
   },
 });
